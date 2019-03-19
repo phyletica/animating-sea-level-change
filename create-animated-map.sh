@@ -23,7 +23,7 @@ convert -monitor \
         -delay "$final_pause" 0000kybp-bathy-small.png \
         animated-bathymetry.gif \
         && rm ????kybp-bathy.png ????kybp-bathy-small.png
-ffmpeg -f gif -i animated-bathymetry.gif animated-bathymetry.mp4
+ffmpeg -i animated-bathymetry.gif -movflags faststart -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" animated-bathymetry.mp4
 
 # rm ????kybp-bathy.pdf
 # rm ????kybp-bathy.pdf.png
