@@ -43,7 +43,7 @@ ffmpeg -f image2 \
         -c:v libx264 -profile:v high \
         -crf 18 \
         -pix_fmt yuv420p \
-        animated-bathymetry-small.mp4
+        animated-bathymetry.mp4
 # ffmpeg -i 'animated-bathymetry.gif' \
 #         -vf 'scale=trunc(iw/2)*2:trunc(ih/2)*2' \
 #         -movflags faststart \
