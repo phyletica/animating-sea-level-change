@@ -7,10 +7,17 @@ long_limits = c(116.8, 126.2)
 lat_limits = c(6.15, 20.2)
 buffer = 1.0
 start_kybp = 430
-# plot dimensions in inches
-plot_width = 5.0
-plot_height = 7.0
-label_font_size = 16.0
+# plot dimensions in cm
+plot_size = 26.0 # specify length of longest side in cm
+label_font_size = 12.0 # in mm
+plot_dpi = 300
+
+plot_width = long_limits[2] - long_limits[1]
+plot_height = lat_limits[2] - lat_limits[1]
+max_dimension = max(plot_height, plot_width)
+scale_factor = plot_size / max_dimension 
+plot_width = plot_width * scale_factor
+plot_height = plot_height * scale_factor
 
 sea_level_data = read.delim(
         "spratt2016-sea-level-projection.txt",
@@ -35,10 +42,11 @@ if (start_kybp > length(sea_level_data$age_calkaBP)) {
     start_kybp = length(sea_level_data$age_calkaBP)
 }
 
-for (i in 1:start_kybp) {
+for (i in (start_kybp + 1):1) {
+    frame_number = (start_kybp + 1) - i
     time = sea_level_data$age_calkaBP[i]
     depth = sea_level_data$sealevel[i]
-    time_ceiling_10k = round(time + 5, -1)
+    time_ceiling_10k = round(time + 4.9, -1)
     label = paste(formatC(time_ceiling_10k, format = "d", width = 4, flag = " "),
             " kybp",
             sep = "")
@@ -69,19 +77,22 @@ for (i in 1:start_kybp) {
                 panel.grid.minor = element_blank(),
                 plot.background = element_blank()
         ) +
-        # labs(x = "Longitude") +
-        # labs(y = "Latitude") +
-        geom_label(aes(x = long_limits[2], y = lat_limits[2],
+        geom_text(aes(x = long_limits[2], y = lat_limits[2],
                       label = label,
-                      size = label_font_size,
                       hjust = "right",
                       vjust = "top"),
-                  label.size = NA,
+                  size = label_font_size,
                   show.legend = FALSE)
     
     plot_path = paste(
+            "frame-",
+            formatC(frame_number, format = "d", width = 4, flag = 0),
+            "-",
             formatC(time, format = "d", width = 4, flag = 0),
             "kybp-bathy.png",
             sep = "")
-    ggsave(plot_path, width = plot_width, height = plot_height, units = "in")
+    ggsave(plot_path, width = plot_width, height = plot_height,
+            device = "png",
+            units = "cm",
+            dpi = plot_dpi)
 }
