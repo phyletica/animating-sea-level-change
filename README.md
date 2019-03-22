@@ -30,10 +30,13 @@ Animation generated using
 Version 1.0.2
 ([Pante and Simon-Bouhet, 2013](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0073051)),
 [ggplot2](https://ggplot2.tidyverse.org/)
-Version 2.2.1 (Wickham, 2009), and
+Version 2.2.1 (Wickham, 2009),
 [ImageMagick](https://imagemagick.org/index.php)
 Version 6.9.10-8 Q16
-x86_64 20180723.
+x86_64 20180723,
+and
+[FFmpeg](https://ffmpeg.org/)
+Version 4.0.2-2
 
 ### Literature cited
 
