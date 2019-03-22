@@ -6,5 +6,5 @@ Just run:
 ```
 or
 ```
-    sh create-animated-map.sh
+    bash create-animated-map.sh
 ```
