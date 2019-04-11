@@ -3,10 +3,18 @@
 library(ggplot2)
 library(marmap)
 
-long_limits = c(116.8, 126.2)
-lat_limits = c(6.15, 20.2)
-buffer = 1.0
+# Coordinates for Philippines
+long_limits = c(116.6, 126.5)
+lat_limits = c(5.15, 20.45)
+buffer = 2.0
+# Coordinates for 4:3 of SE Asia
+# long_limits = c(93.5, 149.5)
+# lat_limits = c(-16.5, 25.5)
+# buffer = 10.0
+
 start_kybp = 430
+land_color = "grey50"
+
 # plot dimensions in cm
 plot_size = 26.0 # specify length of longest side in cm
 label_font_size = 12.0 # in mm
@@ -55,8 +63,8 @@ for (i in (start_kybp + 1):1) {
                     # alpha = 0.2,
                     show.legend = FALSE) +
         scale_fill_gradient(limits = c(depth, max(bathy_data)),
-                low = "gray",
-                high = "gray",
+                low = land_color,
+                high = land_color,
                 na.value = "white") +
         coord_fixed(xlim = long_limits,
                     ylim = lat_limits,

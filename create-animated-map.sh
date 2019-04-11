@@ -12,10 +12,10 @@ num_extra_frames_for_pause=30
 
 for plot_path in frame-????-????kybp-bathy.png
 do
-
     plot_path_prefix="${plot_path%.*}"
     small_plot_path="${plot_path_prefix}-small.png"
-    convert "$plot_path" -flatten -strip -resize @${size} PNG8:${small_plot_path}
+    # Crop to remove margin left by ggplot and reduce size of pngs
+    convert "$plot_path" -gravity center -crop 96.25%\! -flatten -strip -resize @${size} PNG8:${small_plot_path}
 done
 
 convert -monitor \
